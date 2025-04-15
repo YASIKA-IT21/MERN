@@ -5,6 +5,7 @@ import Register from "./pages/Register.jsx";
 import Loginpage from "./pages/Loginpage.jsx";
 import ProductDetailsPage from "./pages/ProductDetailsPage.jsx";
 import ProductListPage from "./pages/ProductListPage.jsx";
+import UserChatComponent from "./pages/user/UserChatComponent.jsx";
 
 {/* User */}
 
@@ -26,6 +27,7 @@ import AdminUserPage from "./pages/admin/AdminUserPage.jsx";
 {/* header footer */}
 import HeaderComponent from "./components/HeaderComponent.jsx";
 import FooterComponent from "./components/FooterComponent.jsx";
+import RouteWithUserChatComponent from "./pages/user/RouteWithUserChatComponent.jsx";
 import ProtectedRouterComponent from "./components/ProtectedRouterComponent.jsx";
 function App() {
 
@@ -34,21 +36,27 @@ function App() {
     <BrowserRouter>
     <HeaderComponent/>
     <Routes>
-      <Route path="/" element={<Homepage/>}> </Route>
-      <Route path="/cart" element={<Cartpage/>}> </Route>
-      <Route path="/register" element={<Register/>}> </Route>
-      <Route path="/product-list" element={<ProductListPage/>}> </Route>
-      <Route path="/product-details/:id" element={<ProductDetailsPage/>}> </Route>
-      <Route path="/login" element={<Loginpage/>}> </Route>
-      <Route path="*" element="Page not found 404"> </Route>
-     {/* protected user route */}
+      {/*  */}
+     <Route element={<RouteWithUserChatComponent/>}>
+          <Route path="/" element={<Homepage/>}> </Route>
+          <Route path="/cart" element={<Cartpage/>}> </Route>
+           <Route path="/register" element={<Register/>}> </Route>
+            <Route path="/product-list" element={<ProductListPage/>}> </Route>
+            <Route path="/product-details" element={<ProductDetailsPage/>}> </Route>
+            <Route path="/login" element={<Loginpage/>}> </Route>
+           <Route path="*" element="Page not found 404"> </Route>
 
-      <Route element={<ProtectedRouterComponent admin={false}/>}> 
+      {/* protected user route */}
+
+        <Route element={<ProtectedRouterComponent admin={false}/>}> 
            <Route path="/user-cart-details" element={<Usercartdetailspage/>}> </Route>
            <Route path="/user-order-details" element={<Userorderdetailspage/>}> </Route>
            <Route path="/user" element={<Userprofilepage/>}> </Route>
-           <Route path="/user-order-page" element={<UserOrderPage/>}> </Route>
+           <Route path="/user-orderpage" element={<UserOrderPage/>}> </Route>
+        </Route>
       </Route>
+     
+     
       {/* protected admin route */}
       <Route element={<ProtectedRouterComponent admin={true}/>}> 
            <Route path="/admin/users" element={<AdminUserPage/>}> </Route>
